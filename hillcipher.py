@@ -84,6 +84,7 @@ def find_key_matrix(plain_text, cipher_text, matrix_size):
 
 
 def get_key_matrix():
+    """ Prompt user to input the key matrix """
     while True:
         try:
             n = int(input("Enter the size of the key matrix (e.g., 2 for a 2x2 matrix): "))
@@ -98,13 +99,14 @@ def get_key_matrix():
             print("Invalid input. Please enter integers only.")
 
 def main():
+    modulus = 26
     print("Hill Cipher Program")
     mode = input("Choose mode (encrypt/decrypt/find_key): ").strip().lower()
     
     if mode == "encrypt":
         plain_text = input("Enter the plaintext: ")
         key_matrix = get_key_matrix()
-        if is_invertible(key_matrix):
+        if is_invertible(key_matrix, modulus):
             cipher_text = encrypt(plain_text, key_matrix)
             print("Cipher Text:", cipher_text)
         else:
@@ -113,7 +115,7 @@ def main():
     elif mode == "decrypt":
         cipher_text = input("Enter the ciphertext: ")
         key_matrix = get_key_matrix()
-        if is_invertible(key_matrix):
+        if is_invertible(key_matrix, modulus):
             plain_text = decrypt(cipher_text, key_matrix)
             print("Plain Text:", plain_text)
         else:
@@ -131,7 +133,8 @@ def main():
             print(e)
     
     else:
-        print("Invalid choice.")
+        print("Invalid mode selected. Choose 'encrypt', 'decrypt', or 'find_key'.")
 
 if __name__ == "__main__":
     main()
+
