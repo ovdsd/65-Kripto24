@@ -40,7 +40,7 @@ def encrypt(plain_text, key_matrix):
     return cipher_text
 
 def decrypt(cipher_text, key_matrix):
-    if not is_invertible(key_matrix):
+    if not is_invertible(key_matrix, 26):
         raise ValueError("The key matrix is not invertible and thus cannot be used for decryption.")
     
     key_matrix_inv = mod_inverse(key_matrix, 26)
